@@ -8,8 +8,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.lolo.andro2048.MainMenuActivity"
+            android:name=".MainMenuActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_activity_game" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
