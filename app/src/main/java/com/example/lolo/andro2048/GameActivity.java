@@ -27,7 +27,7 @@ public class GameActivity extends Activity {
         mLayoutManager.scrollToPosition(0);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new GameGridAdapter();
+        mAdapter = new GameGridAdapter(new Game());
         mRecyclerView.setAdapter(mAdapter);
     }
 
