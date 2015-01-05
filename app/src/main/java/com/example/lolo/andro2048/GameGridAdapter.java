@@ -35,7 +35,6 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Integer number = mGame.getTileNumber(position);
-        System.out.println(number);
         holder.mTileNumber.setText(number.toString());
     }
 

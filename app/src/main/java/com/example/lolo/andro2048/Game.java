@@ -12,9 +12,6 @@ public class Game {
 
     public Game() {
         mGame = new ArrayList<Integer>();
-        for (int i = 0; i < 16; i++) {
-            mGame.add(i, 0);
-        }
         startGame();
     }
 
@@ -39,6 +36,9 @@ public class Game {
     }
 
     private void startGame() {
+        for (int i = 0; i < 16; i++) {
+            mGame.add(i, 0);
+        }
         mGame.set(getRandomEmptyTile(), 2);
         mGame.set(getRandomEmptyTile(), getRandomStarter());
     }
