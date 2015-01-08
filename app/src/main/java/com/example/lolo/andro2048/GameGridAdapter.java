@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by lolo on 1/4/2015.
- */
 public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHolder> {
     private Game mGame;
 
@@ -22,8 +19,8 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
         }
     }
 
-    public GameGridAdapter(Game game) {
-        mGame = game;
+    public GameGridAdapter() {
+        mGame = new Game();
     }
 
     @Override
@@ -34,13 +31,16 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Integer number = mGame.getTileNumber(position);
-        holder.mTileNumber.setText(number.toString());
+        holder.mTileNumber.setText(mGame.getTileNumber(position).toString());
     }
 
     @Override
     public int getItemCount() {
         // return mGame.getSize();
         return 16;
+    }
+
+    public Game getGame() {
+        return mGame;
     }
 }
