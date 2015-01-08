@@ -31,7 +31,14 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTileNumber.setText(mGame.getTileNumber(position).toString());
+        Integer tileNumber = mGame.getTileNumber(position);
+        if (tileNumber == 0) {
+            holder.mTileNumber.setBackgroundResource(Palette.TILES.get(tileNumber));
+        }
+        else {
+            holder.mTileNumber.setBackgroundResource(Palette.TILES.get((int)(Math.log(tileNumber) / Math.log(2))));
+            holder.mTileNumber.setText(tileNumber.toString());
+        }
     }
 
     @Override
