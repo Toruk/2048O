@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#ffffff</color>
+
     <!-- App colors -->
     <color name="primary">#ffeb3b</color>
     <color name="primary_dark">#fdd835</color>

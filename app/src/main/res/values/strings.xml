@@ -2,9 +2,10 @@
 <resources>
 
     <string name="app_name">Andro2048</string>
-    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_game">2048</string>
     <string name="action_reset">Reset</string>
     <string name="action_save">Save</string>
     <string name="action_load">Load</string>
+    <string name="rule">Join the numbers and get to the 2048 tile !</string>
 
 </resources>

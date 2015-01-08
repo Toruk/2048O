@@ -13,6 +13,7 @@
     <TextView android:layout_width="48dp"
         android:layout_height="48dp"
         android:id="@+id/tile_number"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/white"/>
 
 </LinearLayout>
