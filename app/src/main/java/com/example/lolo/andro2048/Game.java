@@ -6,12 +6,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Game {
+
     private static String SAVE_PATH = "current_game";
-    ArrayList<Integer> mGame;
+    private ArrayList<Integer> mGame;
+    private static final int SIZE = 16;
 
     public Game() {
         mGame = new ArrayList<Integer>(16);
@@ -20,8 +21,7 @@ public class Game {
 
     private int getRandomEmptyTile() {
         ArrayList<Integer> tiles = new ArrayList<Integer>();
-
-        for (int i = 0; i < mGame.size(); i++) {
+        for (int i = 0; i < SIZE; i++) {
             if (mGame.get(i) == 0)
                 tiles.add(i);
         }
@@ -31,18 +31,25 @@ public class Game {
 
     public void startGame() {
         mGame.clear();
-        for (Integer i = 0; i < 16; i++)
+        for (Integer i = 0; i < SIZE; i++)
             mGame.add(0);
-
         mGame.set(getRandomEmptyTile(), 2);
         mGame.set(getRandomEmptyTile(), (new Random().nextInt(2)+1)*2);
     }
 
-    public void collapseHorizontally() {
+    public void collapseTop() {
 
     }
 
-    public void collapseVertically() {
+    public void collapseBottom() {
+
+    }
+
+    public void collapseRight() {
+
+    }
+
+    public void collapseLeft() {
 
     }
 
@@ -51,7 +58,7 @@ public class Game {
     }
 
     public int getSize() {
-        return 16;
+        return SIZE;
     }
 
     public void save(Context ctx) {
