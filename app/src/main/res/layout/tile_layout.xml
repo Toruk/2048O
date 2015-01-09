@@ -3,17 +3,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_margin="8dp"
     android:id="@+id/tile_inner"
-    android:layout_margin="16dp"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
-    tools:showIn="@layout/game_tileview"
-    android:weightSum="1">
+    tools:showIn="@layout/game_tileview">
     
-    <TextView android:layout_width="48dp"
-        android:layout_height="48dp"
+    <TextView android:layout_width="64dp"
+        android:layout_height="64dp"
         android:id="@+id/tile_number"
         android:gravity="center"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </LinearLayout>
