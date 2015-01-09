@@ -57,7 +57,7 @@ public class Game {
 
     public void startGame() {
         mGame.clear();
-        for (Integer i = 0; i < SIZE*SIZE; i++)
+        for (Integer i = 0; i < SIZE * SIZE; i++)
             mGame.add(0);
 
         mWon = false;
@@ -85,7 +85,7 @@ public class Game {
     }
 
     public void play(int dir) {
-        if (mOver || mWon) return; // Don't do anything if the game's over
+        if (mOver || mWon) return;
 
         int original_dir = dir;
 
@@ -145,7 +145,7 @@ public class Game {
             int new_tile = getRandomEmptyTile();
             mGame.set(new_tile, 2);
             if (!(getRandomEmptyTile() >= 0 || tileMatchesAvailable())) {
-                this.mOver = true; // Game over!
+                this.mOver = true;
                 System.err.println("### over ###");
             }
         }
@@ -171,7 +171,7 @@ public class Game {
         try {
             outputStream = ctx.openFileOutput(SAVE_PATH, Context.MODE_PRIVATE);
             outputStream.write(saveData.getBytes());
-            System.err.println("same saved " + saveData);
+            System.err.println("game saved " + saveData);
             outputStream.close();
         } catch (Exception e) {
             System.err.println("io save error");
