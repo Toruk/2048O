@@ -2,6 +2,7 @@ package com.example.lolo.andro2048;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -18,16 +19,24 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity implements GameListener {
 
+    private static final String PREFS_NAME = "game_data";
     private RecyclerView mRecyclerView;
     private GameGridAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView mScoreView;
+    private Integer mHighScore;
+    private TextView mHighScoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mScoreView = (TextView) findViewById(R.id.score);
+        mHighScoreView = (TextView) findViewById(R.id.high_score);
+
+        SharedPreferences gameData = getSharedPreferences(PREFS_NAME, 0);
+        mHighScore = gameData.getInt("high_score", 0);
+        mHighScoreView.setText(mHighScore.toString());
 
         mRecyclerView = (RecyclerView) findViewById(R.id.game_gridview);
         mRecyclerView.setHasFixedSize(true);
@@ -45,13 +54,33 @@ public class GameActivity extends Activity implements GameListener {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences gameData = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = gameData.edit();
+        editor.putInt("high_score", mHighScore);
+        editor.commit();
+    }
+
+    @Override
     public void onScoreUpdate() {
+        final Integer score = mAdapter.getGame().getScore();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mScoreView.setText(mAdapter.getGame().getScore().toString());
+                mScoreView.setText(score.toString());
             }
         });
+        if (score > mHighScore) {
+            mHighScore = score;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mHighScoreView.setText(mHighScore.toString());
+                }
+            });
+        }
     }
 
     @Override
