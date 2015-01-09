@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHolder> {
+public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHolder> implements SwipeHandler {
     private Game mGame;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,6 +40,11 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
             holder.mTileNumber.setBackgroundResource(Palette.TILES.get((int)(Math.log(tileNumber) / Math.log(2))));
             holder.mTileNumber.setText(tileNumber.toString());
         }
+    }
+
+    public void onSwipe(int dir) {
+        mGame.play(dir);
+        notifyDataSetChanged();
     }
 
     @Override

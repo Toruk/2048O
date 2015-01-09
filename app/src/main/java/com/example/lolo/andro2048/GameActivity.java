@@ -39,7 +39,7 @@ public class GameActivity extends Activity {
         mAdapter = new GameGridAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-        SwipeDetector touchListener = new SwipeDetector(mRecyclerView, mAdapter.getGame());
+        SwipeDetector touchListener = new SwipeDetector(mRecyclerView, mAdapter);
         mRecyclerView.setOnTouchListener(touchListener);
     }
 
