@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -120,7 +121,7 @@ public class Game {
 
                         if (newValue == 2048) {
                             mWon = true;
-                            System.err.println("you win!");
+                            System.err.println("### win ###");
                         }
                         else
                             moved = true;
@@ -145,7 +146,7 @@ public class Game {
             mGame.set(new_tile, 2);
             if (!(getRandomEmptyTile() >= 0 || tileMatchesAvailable())) {
                 this.mOver = true; // Game over!
-                System.err.println("over");
+                System.err.println("### over ###");
             }
         }
     }
@@ -162,7 +163,7 @@ public class Game {
 
     public void save(Context ctx) {
         FileOutputStream outputStream = null;
-        String saveData = "";
+        String saveData = mScore+":";
 
         for (Integer cell : mGame) saveData += cell + ":";
         saveData = saveData.substring(0, saveData.length()-1);
@@ -194,13 +195,11 @@ public class Game {
             System.err.println("io load error");
         }
 
-        String[] cells = content.split(":");
-        if (cells.length == SIZE * SIZE){
-            int idx = 0;
-            for (String s:cells) {
-                mGame.set(idx,Integer.parseInt(s));
-                idx++;
-            }
+        ArrayList<String> cells = new ArrayList<String>(Arrays.asList(content.split(":")));
+        if (cells.size() == 1 + SIZE * SIZE) {
+            mScore = Integer.parseInt(cells.get(0));
+            for (int idx = 1; idx < cells.size(); idx++)
+                mGame.set(idx-1,Integer.parseInt(cells.get(idx)));
         } else {
             failure = true;
             System.err.println("bad save file");
