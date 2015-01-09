@@ -43,6 +43,12 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
             holder.mTileNumber.setText(tileNumber.toString());
         }
         mGameListener.onScoreUpdate();
+        if (mGame.getWon()) {
+            mGameListener.onWin();
+        }
+        else if (mGame.getOver()) {
+            mGameListener.onLose();
+        }
     }
 
     public void onSwipe(int dir) {
@@ -52,8 +58,7 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        // return mGame.getSize();
-        return 16;
+        return mGame.getSize();
     }
 
     public Game getGame() {

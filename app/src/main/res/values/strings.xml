@@ -7,5 +7,9 @@
     <string name="action_save">Save</string>
     <string name="action_load">Load</string>
     <string name="rule">Join the numbers and get to the 2048 tile !</string>
+    <string name="score">SCORE</string>
+    <string name="best">BEST</string>
+    <string name="win">YOU WIN !</string>
+    <string name="lose">YOU LOST...</string>
 
 </resources>

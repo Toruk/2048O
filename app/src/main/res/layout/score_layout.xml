@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="SCORE"/>
+                android:text="@string/score"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="BEST"/>
+                android:text="@string/best"/>
 
             <TextView
                 android:layout_width="wrap_content"

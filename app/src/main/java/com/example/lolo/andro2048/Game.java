@@ -121,7 +121,6 @@ public class Game {
 
                         if (newValue == 2048) {
                             mWon = true;
-                            System.err.println("### win ###");
                         }
                         else
                             moved = true;
@@ -146,7 +145,6 @@ public class Game {
             mGame.set(new_tile, 2);
             if (!(getRandomEmptyTile() >= 0 || tileMatchesAvailable())) {
                 this.mOver = true;
-                System.err.println("### over ###");
             }
         }
     }
@@ -158,6 +156,10 @@ public class Game {
     public int getSize() {
         return SIZE;
     }
+
+    public boolean getWon() { return mWon; }
+
+    public boolean getOver() { return mOver; }
 
     public Integer getScore() { return mScore; }
 
@@ -171,10 +173,8 @@ public class Game {
         try {
             outputStream = ctx.openFileOutput(SAVE_PATH, Context.MODE_PRIVATE);
             outputStream.write(saveData.getBytes());
-            System.err.println("game saved " + saveData);
             outputStream.close();
         } catch (Exception e) {
-            System.err.println("io save error");
         }
     }
 
@@ -187,12 +187,10 @@ public class Game {
             byte[] buffer = new byte[(int) fis.getChannel().size()];
             fis.read(buffer);
             for (byte b:buffer) content += (char)b;
-            System.err.println("game loaded");
             fis.close();
         } catch (IOException e) {
             // We couldn't load the previous game. Start a new one.
             failure = true;
-            System.err.println("io load error");
         }
 
         ArrayList<String> cells = new ArrayList<String>(Arrays.asList(content.split(":")));
@@ -202,7 +200,6 @@ public class Game {
                 mGame.set(idx-1,Integer.parseInt(cells.get(idx)));
         } else {
             failure = true;
-            System.err.println("bad save file");
         }
 
         if (failure) {

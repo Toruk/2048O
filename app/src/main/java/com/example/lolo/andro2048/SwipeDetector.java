@@ -1,6 +1,5 @@
 package com.example.lolo.andro2048;
 
-import android.text.Layout;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -103,14 +102,6 @@ public class SwipeDetector implements View.OnTouchListener {
                 }
 
                 mVelocityTracker.addMovement(motionEvent);
-                /*float deltaX = motionEvent.getRawX() - mDownX;
-                float deltaY = motionEvent.getRawY() - mDownY;
-                if (Math.abs(deltaX) > mSlop && Math.abs(deltaY) < Math.abs(deltaX) / 2) {
-                    mSwiping = true;
-                    mSwipingSlop = (deltaX > 0 ? mSlop : -mSlop);
-                    //mView.getParent().requestDisallowInterceptTouchEvent(true);
-                }*/
-
                 break;
             }
         }

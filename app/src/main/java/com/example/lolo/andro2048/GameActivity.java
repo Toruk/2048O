@@ -1,20 +1,12 @@
 package com.example.lolo.andro2048;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.Layout;
-import android.view.GestureDetector;
 import android.view.Menu;
-import android.view.View;
 import android.view.MenuItem;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class GameActivity extends Activity implements GameListener {
@@ -26,6 +18,7 @@ public class GameActivity extends Activity implements GameListener {
     private TextView mScoreView;
     private Integer mHighScore;
     private TextView mHighScoreView;
+    private TextView mGameStateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +26,7 @@ public class GameActivity extends Activity implements GameListener {
         setContentView(R.layout.activity_game);
         mScoreView = (TextView) findViewById(R.id.score);
         mHighScoreView = (TextView) findViewById(R.id.high_score);
+        mGameStateView = (TextView) findViewById(R.id.game_state);
 
         SharedPreferences gameData = getSharedPreferences(PREFS_NAME, 0);
         mHighScore = gameData.getInt("high_score", 0);
@@ -41,7 +35,6 @@ public class GameActivity extends Activity implements GameListener {
         mRecyclerView = (RecyclerView) findViewById(R.id.game_gridview);
         mRecyclerView.setHasFixedSize(true);
 
-        // mLayoutManager = new GridLayoutManager(this, mGame.getColumnCount());
         mLayoutManager = new GridLayoutManager(this, 4);
         mLayoutManager.scrollToPosition(0);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -85,16 +78,12 @@ public class GameActivity extends Activity implements GameListener {
 
     @Override
     public void onWin() {
-
+        mGameStateView.setText(R.string.win);
     }
 
     @Override
     public void onLose() {
-
-    }
-
-    public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        mGameStateView.setText(R.string.lose);
     }
 
     @Override
@@ -114,6 +103,7 @@ public class GameActivity extends Activity implements GameListener {
         //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.action_reset:
+                mGameStateView.setText(null);
                 mAdapter.getGame().startGame();
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -121,6 +111,7 @@ public class GameActivity extends Activity implements GameListener {
                 mAdapter.getGame().save(this);
                 break;
             case R.id.action_load:
+                mGameStateView.setText(null);
                 mAdapter.getGame().load(this);
                 mAdapter.notifyDataSetChanged();
                 break;
