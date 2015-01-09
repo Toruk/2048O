@@ -13,6 +13,7 @@ import java.util.Random;
 public class Game {
     private static String SAVE_PATH = "current_game";
     private static int SIZE = 4;
+    private static int GAME_SIZE = 16;
     ArrayList<Integer> mGame;
     private boolean mWon;
     private boolean mOver;
@@ -154,7 +155,7 @@ public class Game {
     }
 
     public int getSize() {
-        return SIZE;
+        return GAME_SIZE;
     }
 
     public boolean getWon() { return mWon; }
