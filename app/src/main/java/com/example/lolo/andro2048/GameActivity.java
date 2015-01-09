@@ -16,17 +16,18 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements GameListener {
 
     private RecyclerView mRecyclerView;
     private GameGridAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private TextView mScoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        mScoreView = (TextView) findViewById(R.id.score);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.game_gridview);
         mRecyclerView.setHasFixedSize(true);
@@ -36,11 +37,31 @@ public class GameActivity extends Activity {
         mLayoutManager.scrollToPosition(0);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new GameGridAdapter();
+        mAdapter = new GameGridAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
         SwipeDetector touchListener = new SwipeDetector(mRecyclerView, mAdapter);
         mRecyclerView.setOnTouchListener(touchListener);
+    }
+
+    @Override
+    public void onScoreUpdate() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mScoreView.setText(mAdapter.getGame().getScore().toString());
+            }
+        });
+    }
+
+    @Override
+    public void onWin() {
+
+    }
+
+    @Override
+    public void onLose() {
+
     }
 
     public interface OnItemClickListener {

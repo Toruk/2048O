@@ -15,7 +15,7 @@ public class Game {
     ArrayList<Integer> mGame;
     private boolean mWon;
     private boolean mOver;
-    private int mScore;
+    private Integer mScore;
 
     public Game() {
         mGame = new ArrayList<Integer>();
@@ -157,6 +157,8 @@ public class Game {
     public int getSize() {
         return SIZE;
     }
+
+    public Integer getScore() { return mScore; }
 
     public void save(Context ctx) {
         FileOutputStream outputStream = null;

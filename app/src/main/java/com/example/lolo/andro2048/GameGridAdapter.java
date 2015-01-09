@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHolder> implements SwipeHandler {
     private Game mGame;
+    private GameListener mGameListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTileNumber;
@@ -19,7 +20,8 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
         }
     }
 
-    public GameGridAdapter() {
+    public GameGridAdapter(GameListener gameListener) {
+        mGameListener = gameListener;
         mGame = new Game();
     }
 
@@ -40,6 +42,7 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
             holder.mTileNumber.setBackgroundResource(Palette.TILES.get((int)(Math.log(tileNumber) / Math.log(2))));
             holder.mTileNumber.setText(tileNumber.toString());
         }
+        mGameListener.onScoreUpdate();
     }
 
     public void onSwipe(int dir) {
