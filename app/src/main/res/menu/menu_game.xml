@@ -1,16 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.lolo.andro2048.GameActivity">
+
     <item android:id="@+id/action_save"
         android:title="@string/action_save"
+        android:icon="@drawable/ic_action_save"
         android:orderInCategory="100"
         android:showAsAction="always" />
+
     <item android:id="@+id/action_load"
         android:title="@string/action_load"
+        android:icon="@drawable/ic_action_load"
         android:orderInCategory="100"
         android:showAsAction="always" />
+    
     <item android:id="@+id/action_reset"
         android:title="@string/action_reset"
+        android:icon="@drawable/ic_action_reset"
         android:orderInCategory="100"
         android:showAsAction="always" />
 </menu>
