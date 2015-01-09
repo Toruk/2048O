@@ -34,6 +34,7 @@ public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHo
         Integer tileNumber = mGame.getTileNumber(position);
         if (tileNumber == 0) {
             holder.mTileNumber.setBackgroundResource(Palette.TILES.get(tileNumber));
+            holder.mTileNumber.setText("");
         }
         else {
             holder.mTileNumber.setBackgroundResource(Palette.TILES.get((int)(Math.log(tileNumber) / Math.log(2))));
