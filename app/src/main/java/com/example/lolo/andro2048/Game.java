@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game {
 
+public class Game implements SwipeHandler {
     private static String SAVE_PATH = "current_game";
-    private ArrayList<Integer> mGame;
-    private static final int SIZE = 16;
+    ArrayList<Integer> mGame;
+    private boolean mWon;
+    private boolean mOver;
+    private int[][] mVectors = {{0,-1},{1,0},{0,1},{-1,0}};
 
     public Game() {
         mGame = new ArrayList<Integer>(16);
@@ -21,7 +23,7 @@ public class Game {
 
     private int getRandomEmptyTile() {
         ArrayList<Integer> tiles = new ArrayList<Integer>();
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < 16; i++) {
             if (mGame.get(i) == 0)
                 tiles.add(i);
         }
@@ -31,26 +33,82 @@ public class Game {
 
     public void startGame() {
         mGame.clear();
-        for (Integer i = 0; i < SIZE; i++)
+        for (Integer i = 0; i < 16; i++)
             mGame.add(0);
+
+        mWon = false;
+        mOver = false;
         mGame.set(getRandomEmptyTile(), 2);
-        mGame.set(getRandomEmptyTile(), (new Random().nextInt(2)+1)*2);
+        mGame.set(getRandomEmptyTile(), (new Random().nextInt(10) == 9) ? 4 : 2);
     }
+/*
+    GameManager.prototype.findFarthestPosition(GameCell cell, vector) {
+        var previous;
+// Progress towards the vector direction until an obstacle is found
+        do {
+            previous = cell;
+            cell = { x: previous.x + vector.x, y: previous.y + vector.y };
+        } while (this.grid.withinBounds(cell) &&
+                this.grid.cellAvailable(cell));
+        return {
+                farthest: previous,
+                next: cell // Used to check if a merge is required
+        };
+    };
+*/
+    public void onSwipe(int dir) {
+        System.out.println("swipe in direction " + dir);
+        if (mOver || mWon) return; // Don't do anything if the game's over
+/*
+        var cell, tile;
+        int[] vector = mVectors[dir];
+        var traversals = this.buildTraversals(vector);
+        var moved = false;
+// Save the current tile positions and remove merger information
+        this.prepareTiles();
+// Traverse the grid in the right direction and move tiles
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                if (mGame.get(y*4+x) > 0) {
 
-    public void collapseTop() {
+                }
+            }
+        }
+        traversals.x.forEach(function (x) {
+            traversals.y.forEach(function (y) {
+                cell = { x: x, y: y };
+                tile = self.grid.cellContent(cell);
+                if (tile) {
+                    var positions = self.findFarthestPosition(cell, vector);
+                    var next = self.grid.cellContent(positions.next);
+// Only one merger per row traversal?
+                    if (next && next.value === tile.value && !next.mergedFrom) {
+                        var merged = new Tile(positions.next, tile.value * 2);
+                        merged.mergedFrom = [tile, next];
+                        self.grid.insertTile(merged);
+                        self.grid.removeTile(tile);
+// Converge the two tiles' positions
+                        tile.updatePosition(positions.next);
+// Update the score
+                        self.score += merged.value;
+// The mighty 2048 tile
+                        if (merged.value === 2048) self.won = true;
+                    } else {
+                        self.moveTile(tile, positions.farthest);
+                    }
+                    if (!self.positionsEqual(cell, tile)) {
+                        moved = true; // The tile moved from its original cell!
+                    }
+                }
+            });
+        });
 
-    }
+        while (dir != original_dir) {
+            mGame = rotateMatrixRight(mGame);
+            dir = (dir + 1) % 4;
+        }
 
-    public void collapseBottom() {
-
-    }
-
-    public void collapseRight() {
-
-    }
-
-    public void collapseLeft() {
-
+*/
     }
 
     public Integer getTileNumber(int idx) {
@@ -58,7 +116,7 @@ public class Game {
     }
 
     public int getSize() {
-        return SIZE;
+        return 16;
     }
 
     public void save(Context ctx) {

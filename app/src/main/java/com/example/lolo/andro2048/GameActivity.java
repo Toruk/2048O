@@ -1,12 +1,14 @@
 package com.example.lolo.andro2048;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Layout;
 import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.View;
 import android.view.MenuItem;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
@@ -14,15 +16,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 public class GameActivity extends Activity {
-    private static final int SWIPE_MIN_DISTANCE = 120;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-
-    private GestureDetector mGestureDetector;
 
     private RecyclerView mRecyclerView;
     private GameGridAdapter mAdapter;
@@ -33,7 +27,6 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        mGestureDetector = new GestureDetector(this, new OnSwipeGestureListener());
 
         mRecyclerView = (RecyclerView) findViewById(R.id.game_gridview);
         mRecyclerView.setHasFixedSize(true);
@@ -45,13 +38,14 @@ public class GameActivity extends Activity {
 
         mAdapter = new GameGridAdapter();
         mRecyclerView.setAdapter(mAdapter);
+
+        SwipeDetector touchListener = new SwipeDetector(mRecyclerView, mAdapter.getGame());
+        mRecyclerView.setOnTouchListener(touchListener);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,36 +81,28 @@ public class GameActivity extends Activity {
         return true;
     }
 
-    /**
-     * Class handling swipe gesture
-     */
-    private class OnSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2,
-                               float velocityX, float velocityY) {
-            System.out.println("fling");
-            float deltaX = e2.getX() - e1.getX();
-            if ((Math.abs(deltaX) < SWIPE_MIN_DISTANCE)
-                    || (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY)) {
-                return false; // insignificant swipe
-            } else {
-                if (deltaX < 0) { // left to right
-                    handleSwipeLeftToRight();
-                } else { // right to left
-                    handleSwipeRightToLeft();
+    public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
+        private OnItemClickListener mListener;
+        GestureDetector mGestureDetector;
+        public RecyclerItemClickListener(Context context, OnItemClickListener listener) {
+            mListener = listener;
+            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
                 }
-            }
-            return true;
+            });
         }
-    }
-
-    private void handleSwipeLeftToRight() {
-        System.out.println("lefttoright");
-        // TODO: implement the business logic here
-    }
-
-    private void handleSwipeRightToLeft() {
-        System.out.println("righttoleft");
-        // TODO: implement the business logic here
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
+            View childView = view.findChildViewUnder(e.getX(), e.getY());
+            if (mGestureDetector.onTouchEvent(e)) {
+                mListener.onItemClick(childView, view.getChildPosition(childView));
+            }
+            return false;
+        }
+        @Override
+        public void onTouchEvent(RecyclerView view, MotionEvent motionEvent) {
+        }
     }
 }
