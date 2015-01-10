@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Zen2048</string>
-    <string name="title_activity_game">Zen2048</string>
+    <string name="app_name">2048 O</string>
+    <string name="title_activity_game">2048 O</string>
     <string name="action_reset">Reset</string>
     <string name="action_save">Save</string>
     <string name="action_load">Load</string>
