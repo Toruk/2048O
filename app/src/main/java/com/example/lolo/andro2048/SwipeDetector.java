@@ -19,10 +19,10 @@ public class SwipeDetector implements View.OnTouchListener {
     // Transient properties
     private float mDownX;
     private float mDownY;
-    private SwipeHandler mHandler;
+    private SwipeListener mHandler;
     private VelocityTracker mVelocityTracker;
 
-    public SwipeDetector(View view, SwipeHandler handler) {
+    public SwipeDetector(View view, SwipeListener handler) {
         ViewConfiguration vc = ViewConfiguration.get(view.getContext());
         mSlop = vc.getScaledTouchSlop();
         mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
@@ -65,18 +65,19 @@ public class SwipeDetector implements View.OnTouchListener {
                 if (absVelocityX > absVelocityY) {
                     if ((velocityX < 0) == (deltaX < 0) && mMinFlingVelocity <= absVelocityX && absVelocityX <= mMaxFlingVelocity) {
                         if (absVelocityX == velocityX)
-                            mHandler.onSwipe(SwipeHandler.RIGHT);
+                            mHandler.onSwipe(SwipeListener.RIGHT);
                         else
-                            mHandler.onSwipe(SwipeHandler.LEFT);
+                            mHandler.onSwipe(SwipeListener.LEFT);
                     }
                 } else {
                     if ((velocityY < 0) == (deltaY < 0) && mMinFlingVelocity <= absVelocityY && absVelocityY <= mMaxFlingVelocity) {
                         if (absVelocityY == velocityY)
-                            mHandler.onSwipe(SwipeHandler.DOWN);
+                            mHandler.onSwipe(SwipeListener.DOWN);
                         else
-                            mHandler.onSwipe(SwipeHandler.UP);
+                            mHandler.onSwipe(SwipeListener.UP);
                     }
                 }
+
                 mVelocityTracker.recycle();
                 mVelocityTracker = null;
                 mDownX = 0;

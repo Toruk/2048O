@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Andro2048</string>
-    <string name="title_activity_game">2048</string>
+    <string name="app_name">Zen2048</string>
+    <string name="title_activity_game">Zen2048</string>
     <string name="action_reset">Reset</string>
     <string name="action_save">Save</string>
     <string name="action_load">Load</string>
-    <string name="rule">Join the numbers and get to the 2048 tile !</string>
+    <string name="rule">Join the numbers and get to the 2048 tile!</string>
     <string name="score">SCORE</string>
     <string name="best">BEST</string>
-    <string name="win">YOU WIN !</string>
+    <string name="win">YOU WIN!</string>
     <string name="lose">YOU LOST...</string>
 
 </resources>

@@ -3,9 +3,7 @@ package com.example.lolo.andro2048;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lolo on 1/8/2015.
- */
+
 public final class Palette {
     public static final List<Integer> TILES = new ArrayList<Integer>() { {
         add(R.drawable.blank_tile);

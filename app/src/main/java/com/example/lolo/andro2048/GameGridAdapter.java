@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHolder> implements SwipeHandler {
+public class GameGridAdapter extends RecyclerView.Adapter<GameGridAdapter.ViewHolder> implements SwipeListener {
     private Game mGame;
     private GameListener mGameListener;
 
