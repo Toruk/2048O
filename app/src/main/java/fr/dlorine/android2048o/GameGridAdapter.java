@@ -1,4 +1,4 @@
-package com.example.lolo.andro2048;
+package fr.dlorine.android2048o;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

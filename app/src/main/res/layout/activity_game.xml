@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.lolo.andro2048.GameActivity">
+    tools:context="com.example.lolo.android2048o.GameActivity">
 
     <TextView
         android:layout_width="match_parent"

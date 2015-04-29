@@ -1,4 +1,4 @@
-package com.example.lolo.andro2048;
+package fr.dlorine.android2048o;
 
 
 public abstract interface GameListener {

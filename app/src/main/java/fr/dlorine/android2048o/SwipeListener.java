@@ -1,4 +1,4 @@
-package com.example.lolo.andro2048;
+package fr.dlorine.android2048o;
 
 interface SwipeListener {
     // This specific order is important (clockwise rotation)

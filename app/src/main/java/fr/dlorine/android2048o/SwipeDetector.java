@@ -1,4 +1,4 @@
-package com.example.lolo.andro2048;
+package fr.dlorine.android2048o;
 
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -24,8 +24,7 @@ public class SwipeDetector implements View.OnTouchListener {
 
     public SwipeDetector(View view, SwipeListener handler) {
         ViewConfiguration vc = ViewConfiguration.get(view.getContext());
-        mSlop = vc.getScaledTouchSlop();
-        mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
+        mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 4;
         mMaxFlingVelocity = vc.getScaledMaximumFlingVelocity();
         mView = view;
         mHandler = handler;

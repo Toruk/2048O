@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.lolo.andro2048.GameActivity">
+    tools:context="com.example.lolo.android2048o.GameActivity">
 
     <item android:id="@+id/action_save"
         android:title="@string/action_save"
